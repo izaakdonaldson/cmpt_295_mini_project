@@ -4,12 +4,17 @@
 #include <cstdint>
 using namespace std;
 
+//random setup
+mt19937 rng(1234);
+uniform_int_distribution<int> dist(0, 100);
 
 // MATRIX IMPLIMENTIONS
 // naive matrix
 // simd matrix
 // multithreaded matrix
 // smid & multithreaded matrix
+// naive block
+// recursive block
 // cuda matrix
 
 __attribute__((optimize("no-tree-vectorize")))
@@ -168,8 +173,6 @@ void test_matrix8(MatrixFn fn){
 }
 
 float* rand_matrix(size_t rows, size_t cols){
-    mt19937 rng(1234);
-    uniform_int_distribution<int> dist(0, 100);
     float* mat = new float[rows * cols];
     for(size_t i = 0; i < rows * cols; i++){
         mat[i] = dist(rng);
