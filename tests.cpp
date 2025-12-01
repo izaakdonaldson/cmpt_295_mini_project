@@ -1,11 +1,11 @@
 #include "matmul.h"
+#include "cuda_matmul.h"
 #include <iostream>
 #include <cstdint>
 using namespace std;
 
 
 using MatrixFn = void(*)(const float*, const float*, float*, size_t, size_t, size_t);
-
 
 void test_matrix8x8(MatrixFn fn){
     float A[24] = {
@@ -69,12 +69,12 @@ void test_rand(MatrixFn fn, size_t A_Rows, size_t A_Cols_B_Rows, size_t B_Cols) 
     delete[] D;
 }
 
-
 int main() {
 
+    // uncomment the test you'd like to run, and change the function pointer to whichever function you want. 
 
-    //test_matrix8x8(simd_matmul); // Change to differnt matrix algorithms for testing.
-    test_rand(simd_matmul, 2, 8, 8);
+    //test_matrix8x8(simd_matmul);
+    test_rand(cuda_matmul, 8, 8, 8);
 
     return 0;
 }
