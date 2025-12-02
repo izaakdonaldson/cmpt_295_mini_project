@@ -36,9 +36,6 @@ void warmup(){
 }
 
 
-
-// run on multiples of 64 * 10^x
-
 int main(int /*argc*/, char** argv) {
     struct timespec start, end;
     size_t N = stoul(argv[1]);
@@ -47,7 +44,7 @@ int main(int /*argc*/, char** argv) {
 
     // Benchmark
     clock_gettime(CLOCK_MONOTONIC, &start);
-    benchmark(mt_simd_matmul, N, N, N);
+    benchmark(co_block_matmul, N, N, N);
     clock_gettime(CLOCK_MONOTONIC, &end);
     double elapsed =
         (end.tv_sec - start.tv_sec) +

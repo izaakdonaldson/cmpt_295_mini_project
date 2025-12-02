@@ -23,9 +23,8 @@ void co_block_matmul(const float* A, const float* B, float* Output, size_t A_Row
 
 
 // ####################### utility functions #######################
-
 float* rand_matrix(size_t rows, size_t cols);
-
 void print_matrix(const float* M, size_t rows, size_t cols);
+// ####################### utility functions #######################
 
 #endif

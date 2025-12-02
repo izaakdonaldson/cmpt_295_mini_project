@@ -1,9 +1,6 @@
 #include <cuda_runtime.h>
 #include <stdio.h>
 
-// ------------------------------------------------------------
-// Matrix struct version
-// ------------------------------------------------------------
 
 typedef struct {
     int width;
@@ -11,16 +8,12 @@ typedef struct {
     float* elements;
 } Matrix;
 
-// Thread block size
+
 #define BLOCK_SIZE 16
 
-// Forward declaration
+
 __global__ void MatMulKernel(const Matrix A, const Matrix B, Matrix C);
 
-
-// ------------------------------------------------------------
-// GPU kernel using Matrix struct
-// ------------------------------------------------------------
 
 __global__ void MatMulKernel(Matrix A, Matrix B, Matrix C)
 {
@@ -40,10 +33,6 @@ __global__ void MatMulKernel(Matrix A, Matrix B, Matrix C)
     C.elements[row * C.width + col] = Cvalue;
 }
 
-
-// ------------------------------------------------------------
-// Host wrapper using Matrix struct
-// ------------------------------------------------------------
 
 void MatMul(const Matrix A, const Matrix B, Matrix C)
 {
@@ -84,16 +73,6 @@ void MatMul(const Matrix A, const Matrix B, Matrix C)
 }
 
 
-// ------------------------------------------------------------
-// Raw-pointer CUDA version (matches your CPU signatures)
-// ------------------------------------------------------------
-
-// prototype
-__global__ void cuda_matmul_kernel(const float* A, const float* B, float* C,
-                                   size_t A_Rows, size_t A_Cols_B_Rows, size_t B_Cols);
-
-
-// kernel
 __global__
 void cuda_matmul_kernel(const float* A, const float* B, float* C,
                         size_t A_Rows, size_t A_Cols_B_Rows, size_t B_Cols)
@@ -114,7 +93,6 @@ void cuda_matmul_kernel(const float* A, const float* B, float* C,
 }
 
 
-// host wrapper (matches your project)
 void cuda_matmul(const float* A, const float* B, float* Output, size_t A_Rows, size_t A_Cols_B_Rows, size_t B_Cols) {
     float *dA, *dB, *dC;
 

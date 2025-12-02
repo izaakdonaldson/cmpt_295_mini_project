@@ -167,11 +167,11 @@ void co_block_matmul(const float* A, const float* B, float* Output, size_t A_Row
 // block_matmul is adapted from  Gagarine Yaikhom yaikhom.com
 void block_matmul(const float* A, const float* B, float* Output, size_t A_Rows, size_t A_Cols_B_Rows, size_t B_Cols){
     // block sizes for Ryzen-7 9800X3D
-    // L1 Cache 48kb       max block size = 32
-    // L2 Cache 1mb        max block size = 128
-    // L3 Cache 96mb       max block size = 1024
+    // L1 Cache 48kb       max block size = 48
+    // L2 Cache 1mb        max block size = 192
+    // L3 Cache 96mb       max block size = 1536
     // Out of Cache        min block size = 4096
-    const size_t s = 4096;
+    const size_t s = 64;
     for (size_t i = 0; i < A_Rows * B_Cols; ++i)
         Output[i] = 0.0f;
     for (size_t ii = 0; ii < A_Rows; ii += s) {
